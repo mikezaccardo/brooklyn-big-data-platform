@@ -14,6 +14,7 @@ brooklyn.catalog:
         
         shell.env:
             INSTALL_DIR: $brooklyn:attributeWhenReady("install.dir")
+            SPARK_URL: $brooklyn:component("spark").attributeWhenReady("spark.cluster.masterNodeConnectionUrl")
 
         install.command: |
             # Install prerequisites
@@ -31,6 +32,11 @@ brooklyn.catalog:
             git clone https://github.com/apache/incubator-zeppelin
             cd incubator-zeppelin
             
+            # Configure Spark Connection
+            cp conf/zeppelin-env.sh.template conf/zeppelin-env.sh
+            sed -i "s|# export MASTER=|export MASTER=$SPARK_URL|g" conf/zeppelin-env.sh
+            chmod +x conf/zeppelin-env.sh
+
             # Build Zeppelin            
             mvn clean package -DskipTests
 
