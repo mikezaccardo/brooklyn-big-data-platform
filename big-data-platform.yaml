@@ -1,0 +1,33 @@
+id: big-data-platform
+name: "Big Data Platform"
+description: "Big Data Platform comprising an Apache Zeppelin server, a Riak cluster, a Redis cluster, and a Spark cluster"
+location: jclouds:softlayer:dal05
+
+services:
+- type: zeppelin-server
+  id: zeppelin-node
+  name: Zeppelin Node
+
+- type: org.apache.brooklyn.entity.nosql.redis.RedisCluster
+  id: redis
+  name: Redis Cluster
+  provisioning.properties:
+    osFamily: ubuntu
+  brooklyn.config:
+    cluster.initial.size: 2
+
+- type: org.apache.brooklyn.entity.nosql.riak.RiakCluster
+  id: riak
+  name: Riak Cluster
+  provisioning.properties:
+    osFamily: ubuntu
+  brooklyn.config:
+    cluster.initial.size: 2
+
+- type: io.cloudsoft.spark.SparkCluster
+  id: spark
+  name: Spark Cluster
+  provisioning.properties:
+    osFamily: ubuntu
+  brooklyn.config:
+    cluster.initial.size: 2
