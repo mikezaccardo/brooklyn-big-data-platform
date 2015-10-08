@@ -1,6 +1,6 @@
-# Big Data Platform
+# Brooklyn Demonstration
 
-Brooklyn blueprint for deploying Big Data Platform, which comprises:
+Brooklyn blueprint to demonstrate deployment of:
 
 * Apache Zeppelin server
 * Riak cluster
